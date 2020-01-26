@@ -1,0 +1,28 @@
+1.1.1. Please download code from GitHub. Zoo application has an issue at some moment garbage collection stops working properly. (monitor at least 5 mins)
+          Task: Please find out the reason, resolve it and explain.
+https://github.com/epm-dmentor/2015-mentoring-program/tree/master/practice/tasks/IDisposable/ZooInDanger
+
+1.1.2. Write a class which will recover itself during garbage collection for the whole life cycle of the application. During recovering you should write something to console to indicate that. Create this object and make GC to collection your object (mentee should explain how to do that: either by memory overloading by creating instances of some classes or calling CG.Collect). Check if recovering works.
+
+1.1.3. Write a class which will constantly recover itself, but you can not use any global fields for that. Please indicate recovering by writing some test to console. Close the program, monitor what happened at the end. Why that happens (wait min 5 minutes (smile) )
+
+1.1.4. Find the issue, explain and fix
+
+public struct Point {
+     public int X;         
+     public void IncX() {            
+         X++;         
+     }     
+}
+
+Main
+static void Main() {
+    var points = new List<Point>(Enumerable.Range(1, 10).Select(p => new Point()));
+    foreach (var p in points) {
+        p.IncX();
+    }
+    foreach (var p in points) {
+        Console.WriteLine(p.X);
+    }
+    Console.ReadKey();
+}
