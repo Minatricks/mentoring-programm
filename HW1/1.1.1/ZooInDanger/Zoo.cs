@@ -118,10 +118,9 @@ namespace Zoo
 
                 Interlocked.Decrement(ref NumCorpses);
 
-                //updated counters/statistic book, it is possible to use Interlocked.Increment for that needs
-                //but as we locked syncObj we don't need that
-                _dead++;
-                NumCorpses++;
+                //To block not only in this function scope
+                Interlocked.Increment(ref _dead);
+                Interlocked.Increment(ref NumCorpses);
 
                 //give more animals
                 if (_animals.Count < MaxAnimals && Provider != null)
@@ -145,7 +144,6 @@ namespace Zoo
                     if (toKill != null)
                     {
                         toKill.Kill();
-                        _animals.Remove(toKill);
                     }
                 }
 
