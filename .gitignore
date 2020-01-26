@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/HW1/1.1.1/.vs/ZooInDanger/v16
+/HW1/1.1.1/ZooInDanger/bin/Debug
+/HW1/1.1.1/ZooInDanger/obj/Debug

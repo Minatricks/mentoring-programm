@@ -75,7 +75,7 @@ namespace Zoo
             {
                 Interlocked.Exchange(ref _lastInfo, 0);
                 ShowStatus();
-                if (NumCorpses%1000 == 0 && NumCorpses > 0)
+                if (NumCorpses % 1000 == 0 && NumCorpses > 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Critical corpse number: {0}", NumCorpses);
@@ -101,7 +101,7 @@ namespace Zoo
         public void IsInHunger(IAnimal animal)
         {
             //emulating feeding animal with some random values
-            
+
             var foodProb = _rnd.Next(1, 100);
             if (foodProb < 96)
                 animal.Eat(foodProb.ToString(CultureInfo.InvariantCulture));
@@ -115,6 +115,8 @@ namespace Zoo
             {
                 //removed dead animals from registration book
                 _animals.Remove(animal);
+
+                Interlocked.Decrement(ref NumCorpses);
 
                 //updated counters/statistic book, it is possible to use Interlocked.Increment for that needs
                 //but as we locked syncObj we don't need that
